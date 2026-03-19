@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ProSlide Viewer Web</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Sora:wght@500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="webapp.css" />
+</head>
+<body>
+  <div class="bg-shape bg-shape-a"></div>
+  <div class="bg-shape bg-shape-b"></div>
+
+  <main class="layout">
+    <section class="panel">
+      <h1>ProSlide Viewer Web</h1>
+      <p class="subtitle">Upload PDF or PPTX, run fullscreen autoplay, and control transitions and timing.</p>
+
+      <div class="form-grid">
+        <label class="field">
+          <span>Presentation File</span>
+          <input id="fileInput" type="file" accept=".pdf,.pptx,application/pdf,application/vnd.openxmlformats-officedocument.presentationml.presentation" />
+        </label>
+
+        <label class="field">
+          <span>Transition</span>
+          <select id="transitionSelect">
+            <option>None</option>
+            <option selected>Fade</option>
+            <option>Slide Left</option>
+            <option>Zoom In</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span>Timing Mode</span>
+          <select id="timingMode">
+            <option value="fixed" selected>Fixed</option>
+            <option value="custom">Custom List</option>
+            <option value="random">Random Min/Max</option>
+          </select>
+        </label>
+
+        <label class="field" id="fixedField">
+          <span>Fixed Seconds</span>
+          <input id="fixedSeconds" type="number" min="0.5" step="0.5" value="10" />
+        </label>
+
+        <label class="field hidden" id="customField">
+          <span>Custom List</span>
+          <input id="customTimes" type="text" placeholder="10,20,15" />
+        </label>
+
+        <div class="field-row hidden" id="randomField">
+          <label class="field">
+            <span>Random Min</span>
+            <input id="randomMin" type="number" min="0.5" step="0.5" value="8" />
+          </label>
+          <label class="field">
+            <span>Random Max</span>
+            <input id="randomMax" type="number" min="0.5" step="0.5" value="20" />
+          </label>
+        </div>
+
+        <label class="field">
+          <span>Start Slide</span>
+          <input id="startSlide" type="number" min="1" step="1" value="1" />
+        </label>
+      </div>
+
+      <div class="toggle-row">
+        <label><input id="loopMode" type="checkbox" checked /> Loop</label>
+        <label><input id="shuffleMode" type="checkbox" /> Shuffle</label>
+        <label><input id="pureMode" type="checkbox" checked /> Pure Fullscreen</label>
+      </div>
+
+      <div class="button-row">
+        <button id="loadBtn" class="btn btn-secondary">Load Slides</button>
+        <button id="startBtn" class="btn btn-primary" disabled>Start Fullscreen</button>
+        <button id="guideBtn" class="btn btn-ghost">Show Guide</button>
+      </div>
+
+      <p id="statusText" class="status">No file loaded.</p>
+      <p class="hint">Keys: Left/Right navigate, Space pause/resume, B blackout, J jump, S snapshot, +/- timing, R reverse, Esc exit fullscreen.</p>
+    </section>
+
+    <section class="stage-shell" id="stageShell">
+      <div id="stage" class="stage">
+        <div id="slideLayer" class="slide-layer"></div>
+        <div id="overlay" class="overlay hidden">
+          <div class="overlay-head">
+            <strong id="overlayTitle">Presentation</strong>
+            <span id="overlayClock"></span>
+          </div>
+          <div class="overlay-foot">
+            <span id="overlayInfo">Ready</span>
+            <progress id="overlayProgress" value="0" max="1"></progress>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <script src="webapp.js"></script>
+</body>
+</html>

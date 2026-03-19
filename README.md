@@ -2,6 +2,11 @@
 
 ProSlide Viewer is a Windows presentation player for PDF and PPTX files with fullscreen playback, custom timing control, transitions, and live presenter controls.
 
+## Live Website
+
+- Public web app URL: https://majidhanif230.github.io/ProSlide-Viewer/
+- Upload your PDF/PPTX directly in browser and run fullscreen slideshow.
+
 ## Why ProSlide Viewer
 
 - Fast fullscreen playback for PDF pages and PPTX slides
@@ -85,6 +90,21 @@ Or use one-click launcher:
 ```powershell
 run_viewer.bat
 ```
+
+## Run as Website (GitHub Pages)
+
+The repository includes a static web app:
+
+- `index.html`
+- `webapp.js`
+- `webapp.css`
+- `.github/workflows/deploy-pages.yml`
+
+Deployment flow:
+
+1. Push to `main`.
+2. GitHub Actions deploys automatically.
+3. Website is published at `https://majidhanif230.github.io/ProSlide-Viewer/`.
 
 ## Project Structure
 
